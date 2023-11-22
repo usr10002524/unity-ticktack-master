@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// キャラクターコントローラ
+/// </summary>
 public class CharacterController : MonoBehaviour
 {
     /// <summary>

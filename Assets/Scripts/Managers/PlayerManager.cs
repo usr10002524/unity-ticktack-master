@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+/// <summary>
+/// プレーヤーマネージャ
+/// </summary>
 public class PlayerManager : MonoBehaviour
 {
     [SerializeField] int score;
@@ -133,12 +136,17 @@ public class PlayerManager : MonoBehaviour
         Instance = this;
     }
 
+    /// <summary>
+    /// Update
+    /// </summary>
     private void Update()
     {
         UpdateInput();
     }
 
-
+    /// <summary>
+    /// 入力処理の更新
+    /// </summary>
     private void UpdateInput()
     {
         if (IsPause())
@@ -169,6 +177,10 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// タイルをクリックした際の処理
+    /// </summary>
+    /// <param name="obj">クリックしたオブジェクト</param>
     private void OnTileClick(GameObject obj)
     {
         if (obj == null)
