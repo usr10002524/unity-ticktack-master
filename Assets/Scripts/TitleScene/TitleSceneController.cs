@@ -114,6 +114,7 @@ public class TitleSceneController : MonoBehaviour
         CharacterManager.Instance.InitializeTitleScene();
         TitleMaanger.Instance.Initialize();
         InstManager.Instance.InitializeTitleScene();
+        SoundVolumeManager.Instance.InitializeTitleScene();
         BgmManager.Instance.PlayBgm(BgmType.bgm01);
 
         lastPosition = CharacterManager.Instance.GetPosition();

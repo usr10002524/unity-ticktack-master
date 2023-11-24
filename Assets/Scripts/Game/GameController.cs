@@ -157,6 +157,7 @@ public class GameController : MonoBehaviour
         ScoreManager.Instance.Initialize();
         ReturnTitleManager.Instance.Initialize();
         InstManager.Instance.Initialize();
+        SoundVolumeManager.Instance.Initialize();
 
         BgmManager.Instance.PlayBgm(BgmType.bgm02);
         ChangeStep(Step.STEP_FADE_WAIT);
@@ -202,6 +203,7 @@ public class GameController : MonoBehaviour
         SpawnManager.Instance.Resume();
         ScoreManager.Instance.Resume();
         InstManager.Instance.ShowButton(true);
+        SoundVolumeManager.Instance.ShowButton(true);
         ChangeStep(Step.STEP_GAME_WAIT);
     }
 
@@ -218,6 +220,7 @@ public class GameController : MonoBehaviour
             SpawnManager.Instance.Pause();
             ScoreManager.Instance.Pause();
             InstManager.Instance.ShowButton(false);
+            SoundVolumeManager.Instance.ShowButton(false);
             BgmManager.Instance.FadeStopBgm(0.5f);
             ChangeStep(Step.STEP_GAMEOVER_START);
         }

@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// イージングコントローラ
+/// </summary>
 public class EasingController : MonoBehaviour
 {
     /// <summary>

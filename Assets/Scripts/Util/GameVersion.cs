@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// ゲームバージョン
+/// </summary>
 public class GameVersion : MonoBehaviour
 {
     /// <summary>

@@ -137,16 +137,20 @@ public class LoadingSceneController : MonoBehaviour
     /// </summary>
     private void StepInit()
     {
-        // AtsumaruAPIが無効の場合は即終了
-        if (!AtsumaruAPI.Instance.IsValid())
-        {
-            ChangeStep(Step.STEP_END);
-        }
-        else
-        {
-            LoadingManager.Instance.Initialize();
-            ChangeStep(Step.STEP_LOAD_START);
-        }
+        // // AtsumaruAPIが無効の場合は即終了
+        // if (!AtsumaruAPI.Instance.IsValid())
+        // {
+        //     ChangeStep(Step.STEP_END);
+        // }
+        // else
+        // {
+        //     LoadingManager.Instance.Initialize();
+        //     ChangeStep(Step.STEP_LOAD_START);
+        // }
+
+        // AtsumaruAPI無効のときはLocalStorageに切り替えるので、とりあえずロードはスタートさせる
+        LoadingManager.Instance.Initialize();
+        ChangeStep(Step.STEP_LOAD_START);
     }
 
     /// <summary>
@@ -155,7 +159,14 @@ public class LoadingSceneController : MonoBehaviour
     private void StepLoadStart()
     {
         LoadingManager.Instance.StartLoading();
-        AtsumaruAPI.Instance.LoadServerData();
+        if (AtsumaruAPI.Instance.IsValid())
+        {
+            AtsumaruAPI.Instance.LoadServerData();
+        }
+        else
+        {
+            LocalStorageAPI.Instance.LoadLocalData();
+        }
         ChangeStep(Step.STEP_LOAD_WAIT);
     }
 
@@ -165,7 +176,7 @@ public class LoadingSceneController : MonoBehaviour
     private void StepLoadWait()
     {
         timeoutTimer += Time.deltaTime;
-        if (AtsumaruAPI.Instance.IsServerDataLoaded())
+        if (IsDataLoaded())
         {
             // ロード完了
             ChangeStep(Step.STEP_COMPLETE);
@@ -178,6 +189,22 @@ public class LoadingSceneController : MonoBehaviour
         else
         {
             ;
+        }
+    }
+
+    /// <summary>
+    /// データロードが完了しているか確認する
+    /// </summary>
+    /// <returns>完了している場合はtrue、そうでない場合はfalseを返す</returns>
+    private bool IsDataLoaded()
+    {
+        if (AtsumaruAPI.Instance.IsValid())
+        {
+            return AtsumaruAPI.Instance.IsServerDataLoaded();
+        }
+        else
+        {
+            return LocalStorageAPI.Instance.IsLocalDataLoaded();
         }
     }
 
